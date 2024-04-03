@@ -20,8 +20,8 @@ E-Commerce Retail Data Analysis is to understanding the behaviours of Customers 
 
 
 ## Tools
-- Database Management System: SQL Server
-- SQL Editor: SQL Server Management Studio (SSMS)
+-- Database Management System: SQL Server
+-- SQL Editor: SQL Server Management Studio (SSMS)
 
 
 ### Dataset Description: 
@@ -29,14 +29,14 @@ E-Commerce Retail Data Analysis is to understanding the behaviours of Customers 
 ## Customers
 
 **Variables:**
-- Customer_ID (int): Unique identifier for each customer.
-- DOB (date): Date of birth of the customer.
-- Gender (varchar): Gender of the customer.
-- City_Code (int): City code of the customer.
+-- Customer_ID (int): Unique identifier for each customer.
+-- DOB (date): Date of birth of the customer.
+-- Gender (varchar): Gender of the customer.
+-- City_Code (int): City code of the customer.
 
 **Schema:**
-- Number of variables: 4
-- Number of records: 5647
+-- Number of variables: 4
+-- Number of records: 5647
 
 **Purpose:**
 This dataset is used to store customer demographics and information.
@@ -44,14 +44,14 @@ This dataset is used to store customer demographics and information.
 ## Prod_cat_info
 
 **Variables:**
-- Prod_cat_code (int): Product category code.
-- Prod_cat (varchar): Product category.
-- Prod_sub_cat_code (int): Product subcategory code.
-- Prod_subcat (varchar): Product subcategory.
+-- Prod_cat_code (int): Product category code.
+-- Prod_cat (varchar): Product category.
+-- Prod_sub_cat_code (int): Product subcategory code.
+-- Prod_subcat (varchar): Product subcategory.
 
 **Schema:**
-- Number of variables: 4
-- Number of records: 23
+-- Number of variables: 4
+-- Number of records: 23
 
 **Purpose:**
 This dataset is used for categorizing products based on their category and subcategory.
