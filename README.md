@@ -26,7 +26,7 @@ E-Commerce Retail Data Analysis is to understanding the behaviours of Customers 
 
 ### Dataset Description: 
 
-## Customers
+## Customer
 
 **Variables:**
 -- Customer_ID (int): Unique identifier for each customer.
@@ -340,7 +340,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT prod_cat, SUM(total_amt) AS Net_Total_Revenue
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   GROUP BY prod.prod_cat
   HAVING prod_cat IN ('Electronics', 'Books')
 ```
@@ -402,7 +402,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT trans.Store_type, SUM(trans.total_amt) AS Combined_Revenue
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   WHERE trans.total_amt > 0
   AND prod_cat IN ('Electronics', 'Clothing' )
   GROUP BY trans.Store_type
@@ -436,7 +436,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT prod.prod_cat, prod.prod_subcat, SUM(trans.total_amt) AS Total_Revenue
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   INNER JOIN [Customers] cust
   ON trans.cust_id = cust.customer_Id
   WHERE trans.total_amt > 0 and cust.Gender = 'M'
@@ -472,7 +472,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT TOP 5 prod.prod_subcat, SUM(trans.total_amt) AS Sales_Amount
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   WHERE trans.total_amt > 0
   GROUP BY prod.prod_subcat
   ORDER BY Sales_Amount;
@@ -572,7 +572,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT prod.prod_cat, COUNT(trans.Qty) AS No_of_returns, ABS(SUM(trans.total_amt)) AS Return_Amount
   FROM [Transactions] trans
   INNER JOIN [prod_cat_info] prod 
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   WHERE trans.total_amt < 0 
   AND DATEDIFF(month, '2014-09-01',trans.tran_date)=3
   GROUP BY prod.prod_cat
@@ -638,7 +638,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT prod.prod_cat, AVG(trans.total_amt) AS Categorial_Average_Revenue
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   WHERE trans.total_amt > 0 
   GROUP BY prod.prod_cat
   HAVING  AVG(trans.total_amt)  > (SELECT AVG(total_amt) AS Overall_Average_Revenue FROM [Transactions] WHERE total_amt > 0)
@@ -672,7 +672,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT TOP 5 prod.prod_cat, COUNT(trans.Qty) AS Quantity_Sold 
   FROM [Transactions] trans
   INNER JOIN [prod_cat_info] prod 
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   WHERE trans.total_amt > 0
   GROUP BY prod.prod_cat
   ORDER BY Quantity_Sold DESC
