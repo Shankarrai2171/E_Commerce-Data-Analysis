@@ -28,7 +28,7 @@ Select * from [prod_cat_info]
 
 **Q3. What is the time range of the transaction data available for analysis? Show the output in number of days, months and years simultaneously in different columns.
 
-**Query.	        SELECT
+**Query.	  SELECT
                   DATEDIFF(DAY, MIN(tran_date), MAX(tran_date)) AS total_days,
                   DATEDIFF(MONTH, MIN(tran_date), MAX(tran_date)) AS total_months,
                   DATEDIFF(YEAR, MIN(tran_date), MAX(tran_date)) AS total_years
