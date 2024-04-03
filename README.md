@@ -13,7 +13,7 @@ E-Commerce Retail Data Analysis is to understanding Customer behavior using thei
 
 
 <div align="center">
-  <![Screenshot 2024-02-15 085731](https://github.com/Shankarrai2171/E_Commerce-Data-Analysis/assets/164284515/530c49b3-9b9c-4e6f-b742-ba39b74705e0)>
+  ![ImageofEcommerce](https://github.com/Shankarrai2171/E_Commerce-Data-Analysis/assets/164284515/e039f978-c467-4479-93c2-33acab971a31)
 </div>
 
 
