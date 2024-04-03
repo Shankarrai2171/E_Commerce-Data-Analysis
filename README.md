@@ -29,7 +29,7 @@ E-Commerce Data Analysis is to understanding the behaviours of Customers by usin
 ## Customer
 
 **Variables:**
--- Customer_ID (int): Unique identifier for each customer.
+- Customer_ID (int): Unique identifier for each customer.
 -- DOB (date): Date of birth of the customer.
 -- Gender (varchar): Gender of the customer.
 -- City_Code (int): City code of the customer.
