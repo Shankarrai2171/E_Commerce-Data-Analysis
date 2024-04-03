@@ -59,20 +59,20 @@ This dataset is used for categorizing products based on their category and subca
 ## Transactions
 
 **Variables:**
-- transaction_id (int): Unique identifier for each transaction.
-- cust_id (int): Customer ID associated with the transaction.
-- tran_date (date): Date of the transaction.
-- prod_subcat_code (int): Product subcategory code.
-- prod_cat_code (int): Product category code.
-- Qty (int): Quantity of products purchased (Negative if it is a return order).
-- Rate (decimal): Unit rate of the product (Negative if it is a return order).
-- Tax (decimal): Tax amount for the transaction.
-- total_amt (decimal): Total amount of the transaction (Negative if it is a return order).
-- Store_type (varchar): Type of store where the transaction occurred.
+-- transaction_id (int): Unique identifier for each transaction.
+-- cust_id (int): Customer ID associated with the transaction.
+-- tran_date (date): Date of the transaction.
+-- prod_subcat_code (int): Product subcategory code.
+-- prod_cat_code (int): Product category code.
+-- Qty (int): Quantity of products purchased (Negative if it is a return order).
+-- Rate (decimal): Unit rate of the product (Negative if it is a return order).
+-- Tax (decimal): Tax amount for the transaction.
+-- total_amt (decimal): Total amount of the transaction (Negative if it is a return order).
+-- Store_type (varchar): Type of store where the transaction occurred.
 
 **Schema:**
-- Number of columns: 10
-- Number of rows: 23053
+-- Number of columns: 10
+-- Number of rows: 23053
 
 **Purpose:**
 This dataset is used for analyzing transactional data, including customer purchase behavior and store performance metrics.
