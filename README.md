@@ -229,7 +229,7 @@ This dataset is used for analyzing transactional data, including customer purcha
 **Query:**
 ```
   SELECT Gender, COUNT(*) AS Count_of_Gender
-  FROM [Customers]
+  FROM [Customer]
   WHERE Gender IS NOT NULL
   GROUP BY Gender
 ```
@@ -257,7 +257,7 @@ This dataset is used for analyzing transactional data, including customer purcha
 **Query:**
 ```
   SELECT TOP 1 city_code, COUNT(customer_id) AS No_of_Customers
-  FROM [Customers]
+  FROM [Customer]
   GROUP BY city_code
   ORDER BY no_of_customers DESC
 ```
@@ -437,7 +437,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
   ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
-  INNER JOIN [Customers] cust
+  INNER JOIN [Customer] cust
   ON trans.cust_id = cust.customer_Id
   WHERE trans.total_amt > 0 and cust.Gender = 'M'
   GROUP BY prod.prod_cat, prod.prod_subcat
