@@ -485,7 +485,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   ABS(SUM(CASE WHEN trans.Qty < 0 THEN trans.Qty ELSE 0 END)) AS Returns_value
   FROM [Transactions] trans
   INNER JOIN [Prod_cat_info] prod
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   GROUP BY prod.prod_subcat
   ORDER BY Sales_value DESC
   )
