@@ -680,7 +680,7 @@ This dataset is used for analyzing transactional data, including customer purcha
   SELECT prod.prod_cat, prod.prod_subcat, ROUND(SUM(trans.total_amt), 3) AS Total_Revenue, ROUND(AVG(trans.total_amt), 3) AS Average_Revenue  
   FROM [Transactions] trans
   INNER JOIN [prod_cat_info] prod 
-  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+  ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_subcat_code
   WHERE trans.total_amt > 0 AND prod.prod_cat IN ('Books', 'Electronics', 'Home and kitchen', 'Footwear', 'Clothing')
   GROUP BY prod_cat, prod_subcat
   ORDER BY CASE WHEN prod_cat = 'Books' THEN 1
