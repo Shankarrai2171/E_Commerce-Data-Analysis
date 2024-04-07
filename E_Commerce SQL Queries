@@ -50,106 +50,106 @@ Select * from [prod_cat_info]
 **Q1. Which channel is most frequently used for transactions?
           
 **Query.	        SELECT TOP 1 Count(*) AS Most_Used, Store_type FROM [Transactions]
-                  GROUP BY Store_type
+                        GROUP BY Store_type
 	                ORDER BY Most_Used desc
 
 
 **Q2. What is the count of Male and Female customers in the database?
           
-**Query.          SELECT Gender, COUNT(*) AS Count FROM [Customer]
+**Query.                SELECT Gender, COUNT(*) AS Count FROM [Customer]
 	                WHERE Gender IS NOT NULL
-                  GROUP BY Gender
+                        GROUP BY Gender
 
 
 **Q3. From which city do we have the maximum number of customers and how many?
       
 **Query.	         SELECT TOP 1 city_code, COUNT(*) AS Customer_count
-                   FROM [Customer]
-                   GROUP BY city_code
-                   ORDER BY Customer_count DESC
+                         FROM [Customer]
+                         GROUP BY city_code
+                         ORDER BY Customer_count DESC
 
 
 **Q4. How many sub-categories are there under the Books category?
        
 **Query. 	         SELECT COUNT(Distinct prod_subcat) AS sub_cat_count
-                   FROM [prod_cat_info]
-                   WHERE prod_cat = 'Books'
-		               GROUP BY prod_cat
+                         FROM [prod_cat_info]
+                         WHERE prod_cat = 'Books'
+		         GROUP BY prod_cat
 
 
 **Q5. What is the maximum quantity of products ever ordered?
 	  
-**Query. 	        SELECT MAX(Qty) AS Maximum_Quantity FROM [Transactions]
+**Query. 	          SELECT MAX(Qty) AS Maximum_Quantity FROM [Transactions]
 
 
 
 **Q6. What is the net total revenue generated in categories Electronics and Books?
          
-**Query.           SELECT SUM(total_amt) AS Total_Revenue, prod_cat FROM [Transactions] t 
-                   Inner Join [prod_cat_info] p 
-                   on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
-	                 Group by p.prod_cat
-	                 Having p.prod_cat IN ('Electronics', 'Books')
+**Query.                  SELECT SUM(total_amt) AS Total_Revenue, prod_cat FROM [Transactions] t 
+                          Inner Join [prod_cat_info] p 
+                          on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
+	                  Group by p.prod_cat
+	                  Having p.prod_cat IN ('Electronics', 'Books')
 
 
 **Q7. How many customers have >10 transactions with us, excluding returns?
       
-**Query.	        SELECT cust_id, COUNT(transaction_id) AS transaction_count FROM [Transactions]
-                  WHERE total_amt > 0
-                  GROUP BY cust_id
-                  HAVING COUNT(transaction_id) > 10
+**Query.	         SELECT cust_id, COUNT(transaction_id) AS transaction_count FROM [Transactions]
+                         WHERE total_amt > 0
+                         GROUP BY cust_id
+                         HAVING COUNT(transaction_id) > 10
 
 
 **Q8. What is the combined revenue earned from the "Electronics " & "Clothing" categories, from "Flagship stores"?
 
-**Query.	       Select round(Sum(total_amt), 2) as combined_revenue, Store_type from [Transactions] t
-	               Inner join [prod_cat_info] p
-	               on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
-                 Where p.prod_cat IN ('Electronics', 'Clothing')
-	               Group by store_type
-	               Having store_type = 'Flagship store'
+**Query.	        Select round(Sum(total_amt), 2) as combined_revenue, Store_type from [Transactions] t
+	                Inner join [prod_cat_info] p
+	                on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
+                        Where p.prod_cat IN ('Electronics', 'Clothing')
+	                Group by store_type
+	                Having store_type = 'Flagship store'
 
 
 
 **Q9. What is the total revenue generated from "Male" customers in "Electronics" category? Output should display total revenue by prod sub-cat.
 
-**Query.           SELECT prod_cat, prod_subcat, SUM(total_amt) AS total_revenue FROM [Customer] c
-                   JOIN [Transactions] t ON c.customer_Id = t.cust_id
-                   JOIN [prod_cat_info] p ON t.prod_cat_code = p.prod_cat_code AND t.prod_subcat_code = p.prod_subcat_code
-                   WHERE total_amt > 0 and Gender = 'M'
-                   GROUP BY prod_cat, prod_subcat
-                   Having prod_cat = 'Electronics'
+**Query.             SELECT prod_cat, prod_subcat, SUM(total_amt) AS total_revenue FROM [Customer] c
+                     JOIN [Transactions] t ON c.customer_Id = t.cust_id
+                     JOIN [prod_cat_info] p ON t.prod_cat_code = p.prod_cat_code AND t.prod_subcat_code = p.prod_subcat_code
+                     WHERE total_amt > 0 and Gender = 'M'
+                     GROUP BY prod_cat, prod_subcat
+                     Having prod_cat = 'Electronics'
 
 
 
 **Q10. What is percentage of sales and returns by product sub catgory; display only top 5 sub categories in terms of sales?
 
-**Query.           Select Top 5 (prod_subcat), Sum(total_amt) as Sales from [Transactions] t
-		               Inner join [prod_cat_info] p
-                   on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
-	                 where t.total_amt > 0
-		               group by prod_subcat
-		               Order by Sales Desc
+**Query.               Select Top 5 (prod_subcat), Sum(total_amt) as Sales from [Transactions] t
+	   	       Inner join [prod_cat_info] p
+                       on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
+	               where t.total_amt > 0
+		       group by prod_subcat
+		       Order by Sales Desc
 		 
-		               WITH perABS
-		               as(SELECT TOP 5 (prod_subcat),
-		                        ABS(SUM(CASE WHEN total_amt < 0 THEN total_amt ELSE 0 END)) as Returns,
+		       WITH perABS
+		       as(SELECT TOP 5 (prod_subcat),
+		       ABS(SUM(CASE WHEN total_amt < 0 THEN total_amt ELSE 0 END)) as Returns,
 			                      SUM(CASE WHEN total_amt > 0 THEN total_amt ELSE 0 END) as Sales
 			                      FROM [Transactions] t
 			                      INNER JOIN [prod_cat_info] p
 			                      on t.prod_cat_code = p.prod_cat_code and t.prod_subcat_code = p.prod_subcat_code
 			                      GROUP BY prod_subcat
 			                      ORDER BY Sales DESC)
-			             SELECT prod_subcat, ROUND((((Returns + Sales)/ Returns)*100), 2) AS Return_percent,
-		               ROUND((((Returns + Sales)/ Sales)*100), 2) AS Sales_percent FROM perABS
+		        SELECT prod_subcat, ROUND((((Returns + Sales)/ Returns)*100), 2) AS Return_percent,
+		        ROUND((((Returns + Sales)/ Sales)*100), 2) AS Sales_percent FROM perABS
 
 
 
 **Q11. For all customers aged between 25 to 35 years find what is the net total revenue generated by these consumers in last 30 days of transactions from max transaction date available in the data?
 
-**Query.            SELECT TOP 30 (tran_date) FROM [Transactions]
-			              GROUP BY tran_date
-			              ORDER BY tran_date DESC
+**Query.               SELECT TOP 30 (tran_date) FROM [Transactions]
+		       GROUP BY tran_date
+	               ORDER BY tran_date DESC
 
 			              WITH ABC
 			              AS(SELECT TOP 30 (tran_date), SUM(total_amt) AS Total_amount FROM [Customer] c
@@ -166,7 +166,7 @@ Select * from [prod_cat_info]
 **Q12. Which product category has seen the max value of returns in the last 3 months of transactions?
         
 **Query. 		       SELECT prod_cat, COUNT(Qty) AS No_of_returns FROM [Transactions] t
-                   INNER JOIN [prod_cat_info] p 
+                               INNER JOIN [prod_cat_info] p 
 		               ON t.prod_cat_code = p.prod_cat_code
 		               WHERE total_amt < 0 AND DATEDIFF(month, '2014-09-01',tran_date)=3
 		               GROUP BY prod_cat
@@ -190,7 +190,7 @@ Select * from [prod_cat_info]
                     GROUP BY store_type
                     ORDER BY total_sales DESC
 
-	                  WITH SalesByAmount AS (
+	            WITH SalesByAmount AS (
                     SELECT store_type, ROUND(SUM(total_amt), 2) AS total_sales FROM [Transactions]
                     GROUP BY store_type
                     ),
@@ -210,7 +210,7 @@ Select * from [prod_cat_info]
 
 **Q14. What are the categories for which average revenue is above the overall average.
           
-**Query.	          WITH CategoryAverage AS (
+**Query.	    WITH CategoryAverage AS (
                     SELECT p.prod_cat, ROUND(AVG(total_amt), 2) AS average_revenue, (SELECT ROUND(AVG(total_amt), 2) FROM [Transactions])         AS overall_average_revenue FROM [Transactions] t
                     JOIN prod_cat_info p ON t.prod_cat_code = p.prod_cat_code
                      GROUP BY p.prod_cat
@@ -227,15 +227,17 @@ Select * from [prod_cat_info]
                     WHERE total_amt > 0
                     GROUP BY prod_cat
                     ORDER BY Quantity_Sold DESC
+
+
                     SELECT prod_cat, prod_subcat, ROUND(SUM(total_amt), 3) AS Total_amount, ROUND(AVG(total_amt), 3) AS Avg_amount FROM [Transactions] t
                     INNER JOIN [prod_cat_info] p
                     ON t.prod_cat_code = p.prod_cat_code
                     WHERE total_amt > 0 AND prod_cat IN ('Books', 'Electronics', 'Home and kitchen', 'Footwear', 'Clothing')
                     GROUP BY prod_cat, prod_subcat
                     ORDER BY CASE WHEN prod_cat = 'Books' THEN 1
-                                 WHEN prod_cat = 'Electronics' THEN 2
-			                     WHEN prod_cat = 'Home and kitchen' THEN 3
-			                     WHEN prod_cat = 'Footwear' THEN 4
-			                     ELSE 5
-			                     END
+                    WHEN prod_cat = 'Electronics' THEN 2
+		    WHEN prod_cat = 'Home and kitchen' THEN 3
+		    WHEN prod_cat = 'Footwear' THEN 4
+		    ELSE 5
+		    END
 
