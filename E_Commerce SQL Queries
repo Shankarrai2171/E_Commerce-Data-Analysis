@@ -210,13 +210,13 @@ Select * from [prod_cat_info]
 
 **Q14. What are the categories for which average revenue is above the overall average.
           
-**Query.	    WITH CategoryAverage AS (
-                    SELECT p.prod_cat, ROUND(AVG(total_amt), 2) AS average_revenue, (SELECT ROUND(AVG(total_amt), 2) FROM [Transactions])         AS overall_average_revenue FROM [Transactions] t
-                    JOIN prod_cat_info p ON t.prod_cat_code = p.prod_cat_code
-                     GROUP BY p.prod_cat
-                     )
-                    SELECT prod_cat, average_revenue FROM [CategoryAverage]
-                    WHERE average_revenue > overall_average_revenue
+**Query.	    SELECT prod.prod_cat, AVG(trans.total_amt) AS Categorial_Average_Revenue
+                    FROM [Transactions] trans
+                    INNER JOIN [Prod_cat_info] prod
+                    ON trans.prod_cat_code = prod.prod_cat_code AND trans.prod_subcat_code = prod.prod_sub_cat_code
+                    WHERE trans.total_amt > 0 
+                    GROUP BY prod.prod_cat
+                    HAVING  AVG(trans.total_amt)  > (SELECT AVG(total_amt) AS Overall_Average_Revenue FROM [Transactions] WHERE total_amt > 0)
 
 
 **Q15. Find the average and total revenue by each subcategory for the categories which are among top 5 categories in terms of quantity sold.
